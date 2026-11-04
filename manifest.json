@@ -1,0 +1,17 @@
+{
+  "name": "Lebanese Aqar Radar",
+  "short_name": "Aqar Radar",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#047857",
+  "theme_color": "#047857",
+  "description": "Real-time rental property aggregator in Lebanon",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/6009/6009864.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
