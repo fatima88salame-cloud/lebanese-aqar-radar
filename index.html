@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lebanese Aqar Radar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-emerald-700 text-white shadow-md py-4 px-6">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-wide">🏠 Lebanese Aqar Radar</h1>
+            <span class="text-xs bg-emerald-800 px-3 py-1 rounded-full uppercase tracking-wider font-medium">Live Feed</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-4xl w-full mx-auto p-4 md:p-6">
+        <!-- Search & Filters -->
+        <div class="mb-6 flex flex-col md:flex-row gap-3">
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="Search by title, area (e.g. Achrafieh, Hamra)..." 
+                class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm"
+                oninput="filterListings()"
+            >
+            <select 
+                id="regionFilter" 
+                class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white shadow-sm"
+                onchange="filterListings()"
+            >
+                <option value="">All Regions</option>
+                <option value="Beirut">Beirut</option>
+                <option value="Metn">Metn</option>
+                <option value="Keserouan">Keserouan</option>
+                <option value="Baabda">Baabda</option>
+            </select>
+        </div>
+
+        <!-- Listings Grid -->
+        <div id="listingsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Sample Listing Card 1 -->
+            <div class="listing-card bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-between" data-title="Modern Apartment in Achrafieh Beirut" data-region="Beirut">
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded">Beirut</span>
+                        <span class="text-lg font-bold text-emerald-700">$1,200 / mo</span>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-base mb-1">Modern Apartment in Achrafieh</h3>
+                    <p class="text-sm text-gray-600 mb-4">2 bedrooms, 2 bathrooms, fully furnished with balcony and parking space.</p>
+                </div>
+                <a href="https://www.olx.com.lb" target="_blank" class="block text-center bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg transition text-sm">
+                    View Original Listing
+                </a>
+            </div>
+
+            <!-- Sample Listing Card 2 -->
+            <div class="listing-card bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-between" data-title="Spacious Apartment in Jdeideh Metn" data-region="Metn">
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2.5 py-1 rounded">Metn</span>
+                        <span class="text-lg font-bold text-emerald-700">$850 / mo</span>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-base mb-1">Spacious Apartment in Jdeideh</h3>
+                    <p class="text-sm text-gray-600 mb-4">3 bedrooms, mountain view, quiet neighborhood close to main roads.</p>
+                </div>
+                <a href="https://www.olx.com.lb" target="_blank" class="block text-center bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg transition text-sm">
+                    View Original Listing
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-4 text-center text-xs text-gray-500">
+        Lebanese Aqar Radar &copy; 2026 &bull; Real-time Rental Aggregator
+    </footer>
+
+    <!-- Simple Filter Script -->
+    <script>
+        function filterListings() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const region = document.getElementById('regionFilter').value.toLowerCase();
+            const cards = document.querySelectorAll('.listing-card');
+
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const cardRegion = card.getAttribute('data-region').toLowerCase();
+                
+                const matchesQuery = title.includes(query);
+                const matchesRegion = region === '' || cardRegion.includes(region);
+
+                if (matchesQuery && matchesRegion) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
